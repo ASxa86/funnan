@@ -6,12 +6,14 @@ target_sources(${PROJECT_NAME} PRIVATE
 	${PROJECT_INCLUDE_DIR}/funnan/xml/Attribute.h
 	${PROJECT_INCLUDE_DIR}/funnan/xml/Document.h
 	${PROJECT_INCLUDE_DIR}/funnan/xml/Element.h
+	${PROJECT_INCLUDE_DIR}/funnan/xml/Text.h
 )
 
 target_sources(${PROJECT_NAME} PRIVATE
 	Attribute.cpp
 	Document.cpp
 	Element.cpp
+	Text.cpp
 )
 
 project_install_target()

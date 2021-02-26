@@ -35,7 +35,7 @@ namespace funnan
 			std::unique_ptr<Element> removeChild(std::ptrdiff_t x);
 
 			template <typename T>
-			Element* getChild(T x) const requires std::predicate<T, const std::unique_ptr<Element>&>
+			Element* getChild(T x) const noexcept requires std::predicate<T, const std::unique_ptr<Element>&>
 			{
 				const auto foundIt = std::ranges::find_if(this->children, x);
 
@@ -47,9 +47,29 @@ namespace funnan
 				return nullptr;
 			}
 
+			Element* getChild(std::string_view x) const noexcept;
+
 			Element* getParent() const noexcept;
 			Element* getRoot() const noexcept;
 
+			template <typename T>
+			std::vector<Element*> getChildren(T x) const noexcept requires std::predicate<T, const std::unique_ptr<Element>&>
+			{
+				std::vector<Element*> v;
+				v.reserve(this->children.size());
+
+				for(const auto& child : this->children)
+				{
+					if(x(child) == true)
+					{
+						v.push_back(child.get());
+					}
+				}
+
+				return v;
+			}
+
+			std::vector<Element*> getChildren(std::string_view x) const noexcept;
 			const std::vector<std::unique_ptr<Element>>& getChildren() const noexcept;
 			const std::vector<Attribute>& getAttributes() const noexcept;
 
@@ -57,7 +77,6 @@ namespace funnan
 			std::vector<std::unique_ptr<Element>> children;
 			std::vector<Attribute> attributes;
 			std::string name;
-			std::string text;
 			Element* parent{nullptr};
 		};
 	}

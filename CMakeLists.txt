@@ -41,7 +41,7 @@ if(BUILD_ENABLE_BENCHMARKS)
 endif()
 
 if(BUILD_ENABLE_TESTS)
-	add_subdirectory(tests)
+	add_subdirectory(test)
 endif()
 
 set(PROJECT_CONFIG_VERSION ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_ROOT_NAME}-config-version.cmake)

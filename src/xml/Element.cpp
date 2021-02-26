@@ -20,14 +20,14 @@ std::string_view Element::getName() const noexcept
 	return this->name;
 }
 
-void Element::setText(std::string_view x)
+void Element::setText(std::string_view /*x*/)
 {
-	this->text = x;
 }
 
 std::string_view Element::getText() const noexcept
 {
-	return this->text;
+	//return this->text;
+	return {};
 }
 
 Element* Element::insertChild(std::ptrdiff_t index, std::unique_ptr<Element> child)
@@ -55,6 +55,11 @@ std::unique_ptr<Element> Element::removeChild(std::ptrdiff_t x)
 	return element;
 }
 
+Element* Element::getChild(std::string_view x) const noexcept
+{
+	return this->getChild([x](const auto& element) { return element->getName() == x; });
+}
+
 Element* Element::getParent() const noexcept
 {
 	return this->parent;
@@ -73,6 +78,11 @@ Element* Element::getRoot() const noexcept
 	}
 
 	return p;
+}
+
+std::vector<Element*> Element::getChildren(std::string_view x) const noexcept
+{
+	return this->getChildren([x](const auto& element) { return element->getName() == x; });
 }
 
 const std::vector<std::unique_ptr<Element>>& Element::getChildren() const noexcept
