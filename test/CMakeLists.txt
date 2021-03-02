@@ -1,2 +1,1 @@
-add_subdirectory(string)
-add_subdirectory(xml)
+add_subdirectory(funnan)

@@ -28,17 +28,13 @@ project(${PROJECT_ROOT_NAME})
 option(BUILD_SHARED_LIBS "Enable building ${PROJECT_NAME} as shared libraries." ON)
 option(BUILD_WARNINGS_AS_ERRORS "Enable building ${PROJECT_NAME} as shared libraries." ON)
 option(BUILD_ENABLE_TESTS "Enable building ${PROJECT_NAME} test applications." ON)
-option(BUILD_ENABLE_BENCHMARKS "Enable building ${PROJECT_NAME} benchmark applications." ON)
 
 set(PROJECT_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${PROJECT_INCLUDE_DIR})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
+add_subdirectory(app)
 add_subdirectory(src)
-
-if(BUILD_ENABLE_BENCHMARKS)
-	add_subdirectory(benchmarks)
-endif()
 
 if(BUILD_ENABLE_TESTS)
 	add_subdirectory(test)
